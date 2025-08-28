@@ -1,70 +1,96 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
 @import "tailwindcss";
 
-@theme{
+/* Theme variables */
+:root {
     --font-display: "Montserrat", sans-serif;
+    --color-primary: oklch(0.4 0.1 340);
+    --color-secondary: oklch(0.4 0.1 160);
+    --color-text-main: oklch(0.15 0 340);
+    --color-text-muted: oklch(0.4 0 340);
+    --color-text-light: oklch(0.6 0 340);
+    --color-text-highlight: oklch(1 0 340);
+    --color-border-main: oklch(0.6 0 340);
+    --color-border-muted: oklch(0.7 0 340);
+    --color-danger: oklch(0.5 0.05 30);
+    --color-warning: oklch(0.5 0.05 100);
+    --color-success: oklch(0.5 0.05 160);
+    --color-info: oklch(0.5 0.05 260);
 }
 
-.bg-dark {
-    background-color: oklch(0.92 0 340);
-}
-
-.bg {
-    background-color: oklch(0.96 0 340);
-}
-
-.bg-light {
-    background-color: oklch(1 0 340);
-}
-
+/* Text styles */
 .text-main {
-    color: oklch(0.15 0 340);
+    color: var(--color-text-main);
 }
 
 .text-muted {
-    color: oklch(0.4 0 340);
-}
-
-.text-mid-light {
-    color: #4a4d55;
+    color: var(--color-text-muted);
 }
 
 .text-light {
-    color: oklch(0.6 0 340);
+    color: var(--color-text-light);
+}
+
+.text-mid-light {
+    color: var(--color-text-muted);
 }
 
 .highlight {
-    color: oklch(1 0 340);
+    color: var(--color-text-highlight);
 }
 
+/* Border styles */
 .border-main {
-    border-color: oklch(0.6 0 340);
+    border-color: var(--color-border-main);
 }
 
 .border-muted {
-    border-color: oklch(0.7 0 340);
+    border-color: var(--color-border-muted);
 }
 
+/* Status colors */
 .primary {
-    color: oklch(0.4 0.1 340);
+    color: var(--color-primary);
 }
 
 .secondary {
-    color: oklch(0.4 0.1 160);
+    color: var(--color-secondary);
 }
 
 .danger {
-    color: oklch(0.5 0.05 30);
+    color: var(--color-danger);
 }
 
 .warning {
-    color: oklch(0.5 0.05 100);
+    color: var(--color-warning);
 }
 
-success {
-    color: oklch(0.5 0.05 160);
+.success {
+    color: var(--color-success);
 }
 
 .info {
-    color: oklch(0.5 0.05 260);
+    color: var(--color-info);
+}
+
+/* Transitions */
+.nav-transition {
+    @apply transition-all duration-300 ease-in-out;
+}
+
+/* Mobile menu transitions */
+.menu-enter {
+    @apply transform opacity-0 -translate-y-2;
+}
+
+.menu-enter-active {
+    @apply transform opacity-100 translate-y-0 transition-all duration-300;
+}
+
+.menu-exit {
+    @apply transform opacity-100 translate-y-0;
+}
+
+.menu-exit-active {
+    @apply transform opacity-0 -translate-y-2 transition-all duration-300;
 }
