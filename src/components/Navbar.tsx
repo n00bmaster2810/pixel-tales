@@ -1,5 +1,5 @@
 import '../App.css'
-import {memo} from 'react'
+import {memo, useCallback} from 'react'
 import {Link, useLocation} from 'react-router-dom'
 import {HiMenu, HiX} from 'react-icons/hi'
 
@@ -32,6 +32,16 @@ const NavItem = memo(({path, label, isActive, onClick}: {
 const Navbar = () => {
     const {isOpen, setIsOpen} = useMenu()
     const location = useLocation()
+    
+    // Memoize toggle function to prevent unnecessary re-renders
+    const toggleMenu = useCallback(() => {
+        setIsOpen(!isOpen)
+    }, [isOpen, setIsOpen])
+    
+    // Memoize close function to prevent unnecessary re-renders
+    const closeMenu = useCallback(() => {
+        setIsOpen(false)
+    }, [setIsOpen])
 
     return (
         <nav className="relative z-50">
@@ -43,7 +53,7 @@ const Navbar = () => {
                 </Link>
 
                 <button
-                    onClick={() => setIsOpen(!isOpen)}
+                    onClick={toggleMenu}
                     className="sm:hidden text-light transition-all duration-300"
                     aria-label="Toggle menu"
                 >
@@ -63,15 +73,18 @@ const Navbar = () => {
                 <div className="max-sm:px-4 max-sm:py-4 w-full">
                     <div
                         className="flex flex-row sm:space-x-[20px] md:space-x-[30px] max-sm:flex-col max-sm:space-y-4 max-sm:ml-4">
-                        {NAV_ITEMS.map(({path, label}) => (
-                            <NavItem
-                                key={path}
-                                path={path}
-                                label={label}
-                                isActive={location.pathname === path}
-                                onClick={() => setIsOpen(false)}
-                            />
-                        ))}
+                        {NAV_ITEMS.map(({path, label}) => {
+                            const isActive = location.pathname === path;
+                            return (
+                                <NavItem
+                                    key={path}
+                                    path={path}
+                                    label={label}
+                                    isActive={isActive}
+                                    onClick={closeMenu}
+                                />
+                            );
+                        })}
                     </div>
                 </div>
             </div>

@@ -9,6 +9,7 @@ const Home = lazy(() => import('./pages/Home'))
 const About = lazy(() => import('./pages/About'))
 const Contact = lazy(() => import('./pages/Contact'))
 const Blog = lazy(() => import('./pages/Blog'))
+const Album = lazy(() => import('./pages/Album'))
 
 function App() {
     return (
@@ -24,6 +25,7 @@ function App() {
                                 <Route path="/about" element={<About/>}/>
                                 <Route path="/contact" element={<Contact/>}/>
                                 <Route path="/blog" element={<Blog/>}/>
+                                <Route path="/album/:id" element={<Album/>}/>
                             </Routes>
                         </main>
                     </Suspense>
